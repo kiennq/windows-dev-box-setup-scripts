@@ -5,7 +5,7 @@
 Disable-UAC
 
 #--- Windows Features ---
-Set-WindowsExplorerOptions -EnableShowHiddenFilesFoldersDrives -EnableShowProtectedOSFiles -EnableShowFileExtensions
+Set-WindowsExplorerOptions -EnableShowFileExtensions
 
 #--- File Explorer Settings ---
 Set-ItemProperty -Path HKCU:\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced -Name NavPaneExpandToCurrentFolder -Value 1
@@ -21,6 +21,25 @@ choco install -y Microsoft-Windows-Subsystem-Linux -source windowsfeatures
 choco install -y visualstudio2017community  # See this for install args: https://chocolatey.org/packages/VisualStudio2017Community
 choco install -y sysinternals
 # choco install -y docker-for-windows
+choco install -y emacs64 neovim
+choco install -y ripgrep
+
+# golang
+# choco install -y golang
+# go get -u github.com/sourcegraph/go-langserver
+# python
+choco install -y python3
+pip3 install --upgrade neovim
+pip3 install --upgrade python-language-server
+
+# redirect tools from wsl
+function RedirectWslCommand($cmd)
+{
+    & "$env:ChocolateyInstall/tools/shimgen" -o "$env:ChocolateyToolsLocation/bin/$cmd.exe" -p (gcm wsl).Path -c $cmd
+}
+
+RedirectWslCommand git
+RedirectWslCommand aspell
 
 # TODO: should pass install args to VS2017 to install additional options
 
