@@ -21,8 +21,9 @@ choco install -y Microsoft-Windows-Subsystem-Linux -source windowsfeatures
 choco install -y visualstudio2017community  # See this for install args: https://chocolatey.org/packages/VisualStudio2017Community
 choco install -y sysinternals
 # choco install -y docker-for-windows
-choco install -y emacs64 neovim
+choco install -y emacsw-lite neovim
 choco install -y ripgrep
+choco install -y wsltty
 
 # golang
 # choco install -y golang
